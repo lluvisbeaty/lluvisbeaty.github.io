@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contacto - Tienda de Belleza</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff8f0;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #ff69b4;
+      padding: 20px;
+      text-align: center;
+      color: white;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 30px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #ff69b4;
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #e0559e;
+    }
+
+    #mensaje-enviado {
+      margin-top: 20px;
+      color: green;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<nav>
+<a href="pagina.html">Inicio</a>
+</nav>
+  <header>
+    <h1>Contáctanos</h1>
+  </header>
+<center><img src="Contactos.jpg"></center>
+
+  <div class="container">
+    <h2>¿Tienes preguntas o sugerencias?</h2>
+    <form id="form-contacto">
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" name="nombre" required>
+
+      <label for="email">Correo electrónico:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="mensaje">Mensaje:</label>
+      <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+
+      <button type="submit">Enviar mensaje</button>
+    </form>
+
+    <p id="mensaje-enviado"></p>
+  </div>
+
+  <script>
+    const form = document.getElementById("form-contacto");
+    const mensaje = document.getElementById("mensaje-enviado");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      // Captura de datos
+      const nombre = document.getElementById("nombre").value;
+      const email = document.getElementById("email").value;
+      const texto = document.getElementById("mensaje").value;
+
+      // Aquí normalmente enviarías los datos al servidor con fetch() o AJAX
+
+      // Mostrar mensaje simulado
+      mensaje.textContent = `¡Gracias, ${nombre}! Hemos recibido tu mensaje. Te responderemos pronto.`;
+
+      // Limpiar formulario
+      form.reset();
+    });
+  </script>
+
+</body>
+</html>

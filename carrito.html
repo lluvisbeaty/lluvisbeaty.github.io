@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Tienda de Belleza</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fff8f0;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #ff69b4;
+      padding: 20px;
+      color: white;
+      text-align: center;
+    }
+    .container {
+      padding: 20px;
+    }
+    .product, .cart-item {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin: 10px;
+      display: inline-block;
+      width: 200px;
+      background: #fff;
+      text-align: center;
+    }
+    img {
+      width: 100px;
+      height: 100px;
+    }
+    button {
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #e0559e;
+    }
+    #total {
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+    #message {
+      margin-top: 20px;
+      font-weight: bold;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+<nav>
+    <a href="pagina.html">Inicio</a>
+    <a href="catalogo de belleza.html">Productos</a>
+    <a href="contactos.html">Contacto</a>
+  </nav>
+
+  <header>
+    <h1>Compras</h1>
+  </header>
+
+  <div class="container">
+    <h2>Productos</h2>
+    <div id="products"></div>
+
+    <h2>Carrito</h2>
+    <div id="cart"></div>
+    <p id="total">Total: $0.00</p>
+    <button onclick="checkout()">Comprar ahora</button>
+    <p id="message"></p>
+  </div>
+
+  <script>
+    const products = [
+      { id: 1, name: "exfoliante de cafe", price:200, image: "cafe.jpg" },
+      { id: 2, name: "Crema Hidratante", price:100, image: "crema.jpg" },
+      { id: 3, name: "exfoliante de azucar", price:200, image: "exfoliante.jpg" }
+    ];
+
+    let cart = [];
+
+    function renderProducts() {
+      const productContainer = document.getElementById('products');
+      products.forEach(product => {
+        const div = document.createElement('div');
+        div.className = 'product';
+        div.innerHTML = `
+          <img src="${product.image}" alt="${product.name}">
+          <h3>${product.name}</h3>
+          <p>$${product.price.toFixed(2)}</p>
+          <button onclick="addToCart(${product.id})">Agregar al carrito</button>
+        `;
+        productContainer.appendChild(div);
+      });
+    }
+
+    function addToCart(productId) {
+      const product = products.find(p => p.id === productId);
+      cart.push(product);
+      renderCart();
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      renderCart();
+    }
+
+    function renderCart() {
+      const cartContainer = document.getElementById('cart');
+      cartContainer.innerHTML = '';
+      let total = 0;
+
+      cart.forEach((item, index) => {
+        const div = document.createElement('div');
+        div.className = 'cart-item';
+        div.innerHTML = `
+          <img src="${item.image}" alt="${item.name}">
+          <p>${item.name}</p>
+          <p>$${item.price.toFixed(2)}</p>
+          <button onclick="removeFromCart(${index})">Eliminar</button>
+        `;
+        cartContainer.appendChild(div);
+        total += item.price;
+      });
+
+      document.getElementById('total').textContent = `Total: $${total.toFixed(2)}`;
+    }
+
+    function checkout() {
+      if (cart.length === 0) {
+        document.getElementById('message').textContent = "Tu carrito está vacío.";
+        return;
+      }
+
+      // Simulación de compra
+      document.getElementById('message').textContent = "¡Gracias por tu compra!";
+      cart = [];
+      renderCart();
+      document.getElementById('total').textContent = "Total: $0.00";
+    }
+
+    renderProducts();
+  </script>
+
+</body>
+</html>
